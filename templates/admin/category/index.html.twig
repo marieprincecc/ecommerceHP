@@ -1,0 +1,29 @@
+{% extends "admin/base_admin.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-3 d-flex align-items-center justify-content-between">
+                <h1>Liste des catégories</h1>
+                <a class="btn btn-primary" href="{{ path('category_new') }}">Ajouter</a>
+            </div>
+            {% for category in categories %}
+                <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ asset(category.imagePath) }}" alt="{{ category.name }}" class="w-100 imageCard">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="text-center">{{ category.name }}</h5>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-info w-100" href="{{ path('category_edit',{'id' : category.id }) }}">Modifier</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    
+    </div>
+{% endblock %}

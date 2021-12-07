@@ -1,0 +1,29 @@
+{% extends "admin/base_admin.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-3 d-flex align-items-center justify-content-between">
+                <h1>Liste des produits</h1>
+                <a class="btn btn-primary" href="{{ path('product_new') }}">Ajouter</a>
+            </div>
+            {% for product in products %}
+                <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ asset(product.imagePath) }}" alt="{{ product.name }}" class="w-100 imageCard">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="text-center">{{ product.name }}</h5>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-info w-100" href="{{ path('product_edit',{'id' : product.id }) }}">Modifier</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    
+    </div>
+{% endblock %}

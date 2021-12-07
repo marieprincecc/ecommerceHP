@@ -7,6 +7,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+      {% for category in categoryRepository.findAll() %}
+
+<li class="nav-item">
+<a class="nav-link" href="{{ path('customer_category_show',{'id' : category.id}) }}">{{ category.name }}</a>
+</li>
+
+{% endfor %} 
+
         {% if app.user %}
 
             {% if app.user.roles[0] is same as "ROLE_ADMIN" %}

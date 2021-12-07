@@ -4,14 +4,41 @@
 <div class="container py-5">
     <h1>Création de compte</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+    <div class="row">
+
+        <div class="card">
+            <div class="col-12">
+                {{ form_start(registrationForm) }}
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    {{ form_row(registrationForm.name) }}
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    {{ form_row(registrationForm.phone) }}
+                                </div>
+
+                                <div class="col-sm-12">
+                                    {{ form_row(registrationForm.email) }}
+                                </div>
+
+                                <div class="col-sm-12 col-md-6">
+                                {{ form_row(registrationForm.plainPassword.first) }}
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                {{ form_row(registrationForm.plainPassword.second) }}
+                                </div>
+
+                                {{ form_row(registrationForm.CGV) }}
+
+                                <button type="submit" class="btn btn-primary">S'inscrire</button>
+                        </div>
+                    </div>
+                 {{ form_end(registrationForm) }}
+            </div>
+        </div>
+
     </div>
+</div>
 {% endblock %}

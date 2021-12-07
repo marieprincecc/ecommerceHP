@@ -8,6 +8,9 @@
                 <h1>Liste des produits</h1>
                 <a class="btn btn-primary" href="{{ path('product_new') }}">Ajouter</a>
             </div>
+            <div class="navigation py-2">
+                {{ knp_pagination_render(products) }}
+            </div> 
             {% for product in products %}
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
                     <div class="card">
@@ -23,6 +26,9 @@
                     </div>
                 </div>
             {% endfor %}
+            <div class="navigation py-2">
+                {{ knp_pagination_render(products) }}
+            </div> 
         </div>
     
     </div>

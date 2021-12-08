@@ -1,0 +1,26 @@
+{% apply inline_css %}
+<style>
+h1 {
+color:blue;
+}
+h3 {
+color:red;
+}
+</style>
+{% endapply %}
+
+<h1>Message contact client</h1>
+<hr>
+<p><strong>Sujet : {{ subject }}</strong></p>
+
+<hr>
+<h3>Informations client</h3>
+<p><strong>Nom complet : {{ fullname }}</strong></p>
+<br>
+<p><strong>Email : {{ email_customer }}</strong></p>
+<br>
+<p><strong>Téléphone : {{ telephone }}</strong></p>
+<hr>
+<h3>Contenu du message</h3>
+<br>
+<p>{{ content }}</p> 

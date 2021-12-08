@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Search\SearchProduct;
+use App\Form\SearchProductType;
 use App\Repository\ProductRepository;
 use App\MesServices\HandleImageService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,14 +27,21 @@ class ProductController extends AbstractController
     public function index(ProductRepository $productRepository,PaginatorInterface $paginator,Request $request): Response
     {
 
+        $search = new SearchProduct();
+        
+        $form = $this->createForm(SearchProductType::class,$search);
+
+        $form->handleRequest($request);
+
         $products = $paginator->paginate(
-            $productRepository->findAll(),
+            $productRepository->findAllBySearchFilter($search),
             $request->query->getInt('page', 1),
             6
         );
 
         return $this->render('admin/product/index.html.twig', [
             'products' => $products,
+            'form' => $form->createView()
         ]);
     } 
 

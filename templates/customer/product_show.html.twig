@@ -20,8 +20,7 @@
 <p class="text-center">{{ product.price | euroPrice}}</p>
 </div>
 <div class="card-footer">
-<a href="#" class="btn btn-primary w-100">Ajouter au panier</a>
-</div>
+<a href="{{ path('add_product',{'id' : product.id}) }}" class="btn btn-primary w-100">Ajouter au panier</a> </div>
 </div>
 </div>
 

@@ -2,11 +2,11 @@
 
 namespace App\Form;
 
-use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Product;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -18,27 +18,27 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('file',FileType::class,[
-            'label' => 'Ajouter une image',
-            'mapped' => false,
-            'constraints' => [
-            new File([
-            'maxSize' => '1m'
-            ])
-            ],
+            ->add('file',FileType::class,[
+                'label' => 'Ajouter une image',
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1m'
+                    ])
+                ],
             ])
             ->add('name',TextType::class,[
-            'label' => 'Nom du produit'
+                'label' => 'Nom du produit'
             ])
             ->add('price',MoneyType::class,[
-            'divisor' => 100,
-            'currency' => 'EUR',
+                'divisor' => 100,
+                'currency' => 'EUR',
             ])
             ->add('category',EntityType::class,[
-                'label' => 'Categorie',
-                'placeholder' => '-- Choisir une categorie --',
+                'label' => 'Catégorie',
+                'placeholder' => '-- Choisir une catégorie --',
                 'class' => Category::class
-            ]) 
+            ])
         ;
     }
 

@@ -9,25 +9,23 @@
                 <a class="btn btn-primary" href="{{ path('product_new') }}">Ajouter</a>
             </div>
 
-           <div class="col-12 mt-3">
+            <div class="col-12 mt-3">
                 <div class="card">
                     <div class="card-header">
                         <h3>Formulaire de recherche</h3>
                     </div>
                     <div class="card-body">
                         {{ form_start(form)}}
-
+                        
                         {{ form_widget(form)}}
 
                         <button class="btn btn-info mt-3" type="submit">Rechercher</button>
-
+                        
                         {{ form_end(form)}}
                     </div>
                 </div>
-            </div> 
-              
+            </div>
 
-            </div> 
             <div class="navigation py-2">
                 {{ knp_pagination_render(products) }}
             </div>

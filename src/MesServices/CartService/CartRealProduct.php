@@ -35,6 +35,4 @@ class CartRealProduct
     {
         return $this->product->getPrice() * $this->qty;
     }
-
-   
 }

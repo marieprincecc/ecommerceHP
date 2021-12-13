@@ -1,0 +1,71 @@
+{% apply inline_css %}
+ <style>
+    h1 {
+        color:blue;
+    }
+    h3 {
+        color:red;
+    }
+ </style>
+{% endapply %}
+
+<h1>Commande #{{ id }}</h1>
+<hr>
+<p><strong>Date : {{ createdAt | date('d-m-Y') }}</strong></p>
+<hr>
+<h3>Produits</h3>
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Produit</th>
+                <th scope="col">P.U</th>
+                <th scope="col" >Qté</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for content in contents %}
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="{{ content.product.imagePath }}" alt="{{ content.product.name }}" class="imageProductCart">
+                            <div class="d-flex flex-column align-items-center justify-content-center">
+                                <p>{{ content.product.name }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ content.product.price | euroPrice }}</td>
+                    <td>
+                        <button class="btn btn-light">{{ content.qty }}</button>
+                    </td>
+                    <td>{{ content.total | euroPrice }}</td>
+                </tr>
+            {% endfor%}
+            <tr>
+                <th colspan="2"></th>
+                <th><strong>Sous Total</strong></th>
+                <th><strong>{{ total | euroPrice }}</strong></th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+<h3>Adresse de livraison</h3> 
+<p>Pays : {{ address.country }}</p>
+<p>Ville : {{ address.city }}</p>
+<p>Code Postal : {{ address.postalCode }}</p>
+<p>Rue : {{ address.street }}</p>
+<p>Commentaire : {{ address.commentary }}</p>
+
+<hr>
+<h3>Service client</h3> 
+<p>En cas de problèmes. Merci de contacter le support.</p>
+
+
+
+
+

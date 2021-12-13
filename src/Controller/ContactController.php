@@ -10,27 +10,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
-/**
-* @Route("/customer/contact",name="customer_contact")
-*/
-public function contact(Request $request,MailerService $mailerService)
-{
-$form = $this->createForm(ContactType::class);
+    /**
+     * @Route("/customer/contact",name="customer_contact")
+     */
+    public function contact(Request $request,MailerService $mailerService)
+    {
+        $form = $this->createForm(ContactType::class);
 
-$form->handleRequest($request);
+        $form->handleRequest($request);
 
-if($form->isSubmitted() && $form->isValid())
-{
-$data = $form->getData();
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $data = $form->getData();
 
-$mailerService->sendContactMail($data);
+            $mailerService->sendContactMail($data);
 
-return $this->redirectToRoute("customer_contact");
+            return $this->redirectToRoute("customer_contact");
 
+        }
+
+        return $this->render("customer/contact.html.twig",[
+            'form' => $form->createView()
+        ]);
+    }
 }
-
-return $this->render("customer/contact.html.twig",[
-'form' => $form->createView()
-]);
-}
-} 

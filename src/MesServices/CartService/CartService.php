@@ -113,40 +113,46 @@ class CartService
 
     public function removeItem(int $id)
     {
-       $cart = $this->getCart();
+        $cart = $this->getCart();
 
-       foreach ($cart as $key => $item ) {
-           if($item->getId()===$id)
-           {    
-               unset($cart[$key]);
-               $this->saveCart($cart);
-           }
-       }
-    }
-
-        public function decrementProduct(int $id)
+        foreach($cart as $key => $item)
         {
-            $cart = $this->getCart();
-
-            foreach($cart as $key => $item)
+            if($item->getId() === $id)
             {
-                if($item->getId() === $id)
-                {
+                unset($cart[$key]);
+                $this->saveCart($cart);
+            }
+        }
+    }
+    
+    public function decrementProduct(int $id)
+    {
+        $cart = $this->getCart();
+
+        foreach($cart as $key => $item)
+        {
+            if($item->getId() === $id)
+            {
                 $qty = $item->getQty();
 
-                    if($qty === 1)
-                    {
-                        unset($cart[$key]);
-                        $this->saveCart($cart);
-                        return;
-                    }
-                    else 
-                    {
+                if($qty === 1)
+                {
+                    unset($cart[$key]);
+                    $this->saveCart($cart);
+                    return;
+                }
+                else 
+                {
                     $item->setQty($qty - 1);
                     $this->saveCart($cart);
                     return;
-                    }
+                }
             }
         }
-    } 
+    }
+
+    public function emptyCart()
+    {
+        $this->saveCart([]);
+    }
 }

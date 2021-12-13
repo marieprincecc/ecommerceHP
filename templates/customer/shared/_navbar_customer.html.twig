@@ -7,13 +7,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-      {% for category in categoryRepository.findAll() %}
 
-<li class="nav-item">
-<a class="nav-link" href="{{ path('customer_category_show',{'id' : category.id}) }}">{{ category.name }}</a>
-</li>
+        {% for category in categoryRepository.findAll() %}
 
-{% endfor %} 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('customer_category_show',{'id' : category.id}) }}">{{ category.name }}</a>
+            </li>
+
+        {% endfor %}
 
         {% if app.user %}
 
@@ -40,8 +41,10 @@
             </li>
 
         {% endif %}
-           <li class="nav-item">
-                <a class="nav-link" href="{{ path('cart_detail') }}">Panier</a>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('cart_detail') }}">Mon panier</a>
             </li>
     
        

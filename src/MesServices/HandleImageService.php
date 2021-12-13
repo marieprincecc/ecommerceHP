@@ -47,6 +47,7 @@ class HandleImageService
 
          //Supprimer l ancienne image
          $fileOldImage = $this->containerBag->get('app_images_directory') . '/../..' . $originalImagePath;
+         
          if(file_exists($fileOldImage))
          {
              unlink($fileOldImage);

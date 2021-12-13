@@ -55,40 +55,41 @@ class CartController extends AbstractController
         ]);
     }
 
-        /**
-        * @Route("panier/supprimer/{id}",name="remove_item_cart")
-        */
-        public function removeItem(int $id,ProductRepository $productRepository,CartService $cartService)
-        {
+     /**
+     * @Route("panier/supprimer/{id}",name="remove_item_cart")
+     */
+    public function removeItem(int $id,ProductRepository $productRepository,CartService $cartService)
+    {
         $product = $productRepository->find($id);
 
         if(!$product)
         {
-        $this->addFlash("danger","Le produit est introuvable.");
-        return $this->redirectToRoute("cart_detail");
+             $this->addFlash("danger","Le produit est introuvable.");
+             return $this->redirectToRoute("cart_detail");
         }
 
         $cartService->removeItem($id);
 
         $this->addFlash("success","Le produit a bien été supprimé du panier.");
         return $this->redirectToRoute("cart_detail");
-        } 
+    }
 
-        /**
-         * @Route("panier/decrementer/{id}", name="decrement_product_cart")
-         */
-        public function decrementItem(int $id, ProductRepository $productRepository, CartService $cartService)
+    /**
+     * @Route("panier/decrementer/{id}",name="decrement_product_cart")
+     */
+    public function decrementProduct(int $id,ProductRepository $productRepository,CartService $cartService)
+    {
+        $product = $productRepository->find($id);
+
+        if(!$product)
         {
-            $product = $productRepository->find($id);
-            if(!$product)
-            {
-            $this->addFlash("danger","Le produit est introuvable.");
-            return $this->redirectToRoute("cart_detail");
-            }
-
-            $cartService->decrementProduct($id);
-
-            $this->addFlash("success","La quantité du produit a bien été décrémentée.");
-            return $this->redirectToRoute("cart_detail");
-            } 
+             $this->addFlash("danger","Le produit est introuvable.");
+             return $this->redirectToRoute("cart_detail");
         }
+
+        $cartService->decrementProduct($id);
+
+        $this->addFlash("success","La quantité du produit a bien été décrémentée.");
+        return $this->redirectToRoute("cart_detail");
+    }
+}

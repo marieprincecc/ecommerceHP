@@ -89,4 +89,64 @@ class CartService
 
         return $detailCart;
     }
+
+    public function getTotal()
+    {
+        $total = 0;
+
+        $cart = $this->getCart();
+
+        foreach($cart as $item)
+        {
+            $product = $this->productRepository->find($item->getId());
+
+            if(!$product)
+            {
+                continue;
+            }
+
+            $total += $product->getPrice() * $item->getQty();
+        }
+
+        return $total;
+    }
+
+    public function removeItem(int $id)
+    {
+       $cart = $this->getCart();
+
+       foreach ($cart as $key => $item ) {
+           if($item->getId()===$id)
+           {    
+               unset($cart[$key]);
+               $this->saveCart($cart);
+           }
+       }
+    }
+
+        public function decrementProduct(int $id)
+        {
+            $cart = $this->getCart();
+
+            foreach($cart as $key => $item)
+            {
+                if($item->getId() === $id)
+                {
+                $qty = $item->getQty();
+
+                    if($qty === 1)
+                    {
+                        unset($cart[$key]);
+                        $this->saveCart($cart);
+                        return;
+                    }
+                    else 
+                    {
+                    $item->setQty($qty - 1);
+                    $this->saveCart($cart);
+                    return;
+                    }
+            }
+        }
+    } 
 }

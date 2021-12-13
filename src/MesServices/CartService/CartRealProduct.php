@@ -30,4 +30,11 @@ class CartRealProduct
         $this->qty =$qty;
         return $this;
     }
+
+    public function getTotal()
+    {
+        return $this->product->getPrice() * $this->qty;
+    }
+
+   
 }
